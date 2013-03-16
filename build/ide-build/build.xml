@@ -1,0 +1,14 @@
+<project>
+	<property name="distojar" value="/Users/tomschindl/git/distrobuilder/at.bestsolution.releng.distrobuilder/target/at.bestsolution.releng.distrobuilder-0.0.1-SNAPSHOT.jar" />
+	<property name="version" location="1.0.0"/>
+	
+	<taskdef name="builder" classpath="${distojar}" classname="at.bestsolution.releng.distrobuilder.ant.DistroBuilderTaskDef" />
+
+	<target name="build-distros" description="Build distros">
+		<builder builddirectory="/Users/tomschindl/git/eclipsecon-tutorial/build/ide-build/build-area/build" p2directorexecutable="/Users/tomschindl/git/eclipsecon-tutorial/build/ide-build/build-area/builder/eclipse/Eclipse.app/Contents/MacOS/eclipse" targetdirectory="/Users/tomschindl/git/eclipsecon-tutorial/build/ide-build/build-area/targets" staticreposdirectory="/Users/tomschindl/git/eclipsecon-tutorial/build/ide-build/build-area/repos" distdirectory="/Users/tomschindl/git/eclipsecon-tutorial/build/ide-build/build-area/dist" version="${version}">
+			<p2repository url="http://download.eclipse.org/e4/downloads/drops/R-0.13-201302282200/repository"/>
+			
+			<installunit name="org.eclipse.e4.core.tools.feature.feature.group"/>
+		</builder>
+	</target>
+</project>
