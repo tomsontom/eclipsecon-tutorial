@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="at.bestsolution.eclipsecontut.target.vaaclipse.feature"
-      label="Feature"
+      label="Vaaclipse Runtime"
       version="1.0.0.qualifier">
 
    <description url="http://www.example.com/description">
@@ -15,7 +15,7 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
-   
+
    <plugin
          id="org.semanticsoft.commons"
          download-size="0"
@@ -142,4 +142,5 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
 </feature>

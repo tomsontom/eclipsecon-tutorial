@@ -23,9 +23,15 @@
 	
 	<modules>
 		<module>../../at.bestsolution.eclipsecontut.target.updatesite</module>
+		<module>../../at.bestsolution.eclipsecontut.target.vaaclipse.feature</module>
 	</modules>
 	
 	<repositories>
+		<repository>
+			<id>juno</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/juno</url>
+		</repository>
 		
 		<repository>
 			<id>efx</id>
@@ -38,6 +44,8 @@
 			<layout>p2</layout>
 			<url>file:/Users/tomschindl/git/vaaclipse/updatesite/target/site</url>
 		</repository>
+		
+		
 	</repositories>
 	
 	<pluginRepositories>
