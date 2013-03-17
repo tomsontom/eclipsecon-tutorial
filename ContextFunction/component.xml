@@ -2,6 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="ContextFunction">
    <implementation class="cf.MyContextFunction"/>
    <property name="service.context.key" type="String" value="service.ICoolService"/>
+   <property name="service.ranking" type="Integer" value="100000"/>
    <service>
       <provide interface="org.eclipse.e4.core.contexts.IContextFunction"/>
    </service>
