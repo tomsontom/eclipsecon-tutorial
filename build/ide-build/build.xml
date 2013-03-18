@@ -15,6 +15,7 @@
 			
 			<installunit name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
 			<installunit name="org.semanticsoft.e4.tools.feature.feature.group"/>
+			<installunit name="org.semanticsoft.e4.tools.source.feature.feature.group"/>
 		</builder>
 	</target>
 </project>
