@@ -10,6 +10,8 @@
  *******************************************************************************/
 package DemoContextFunction.handlers;
 
+import javax.inject.Inject;
+
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -19,10 +21,8 @@ import service.ICoolService;
 public class AboutHandler {
 	
 
-
-	
 	@Execute
-	public void execute( IEclipseContext context, @Optional ICoolService coolService) {
+	public void execute( IEclipseContext context, ICoolService coolService) {
 		
 		coolService.coolAction();
 		

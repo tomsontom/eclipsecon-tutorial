@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="ContextFunction">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="ContextFunction1">
    <implementation class="cf.MyContextFunction"/>
    <property name="service.context.key" type="String" value="service.ICoolService"/>
    <property name="service.ranking" type="Integer" value="100000"/>

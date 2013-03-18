@@ -4,8 +4,7 @@ Bundle-Name: ContextFunction
 Bundle-SymbolicName: ContextFunction
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Service-Component: component.xml,
- component1.xml
+Service-Component: OSGI-INF/component1.xml, OSGI-INF/component.xml
 Export-Package: service
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.osgi.services;bundle-version="3.3.100",

@@ -4,6 +4,6 @@
    <service>
       <provide interface="org.eclipse.e4.core.di.suppliers.ExtendedObjectSupplier"/>
    </service>
-   <property name="dependency.injection.annotation" type="String" value="src.CoolInjection"/>
-   <property name="service.ranking" type="Integer" value="100000"/>
+   <property name="dependency.injection.annotation" type="String" value="annotation.CoolInjection"/>
+   <property name="service.ranking" type="Integer" value="-100000"/>
 </scr:component>
