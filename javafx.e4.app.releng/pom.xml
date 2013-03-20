@@ -18,7 +18,8 @@
 		<junit-version>4.8.1</junit-version>
 		<mockito-version>1.8.4</mockito-version>
 		<platform-version>4.2</platform-version>
-		<efx-version>0.1.1</efx-version>
+		<efx-version>0.8.1</efx-version>
+		<workspaceloc></workspaceloc>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -33,7 +34,7 @@
 		<repository>
 			<id>efx-target</id>
 			<layout>p2</layout>
-			<url>file:/Users/tomschindl/Documents/e-workspaces/eclipse_tutorial/target</url>
+			<url>file:/${workspaceloc}/target</url>
 		</repository>
 
 	</repositories>
@@ -59,42 +60,6 @@
 				<extensions>true</extensions>
 			</plugin>
 
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<resolver>p2</resolver>
-					<pomDependencies>consider</pomDependencies>
-					<environments>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
-					</environments>
-				</configuration>
-			</plugin>
 		</plugins>
 
 
