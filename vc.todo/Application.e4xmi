@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e4modelextension:VaaclipseApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:e4modelextension="http://www.semanticsoft.org/ExtensionUI/e4modelextension" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_KosWgDjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.ide.application">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_KosWlzjEEeKcQPOnIbNSoQ" elementId="vc.todo.window.main" label="vc.todo" width="500" height="400">
+    <tags>mainWindow</tags>
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_KosWnzjEEeKcQPOnIbNSoQ" elementId="vc.todo.perspectivestack">
+      <children xsi:type="advanced:Perspective" xmi:id="_KosWoDjEEeKcQPOnIbNSoQ" elementId="vc.todo.perspective.0">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_KosWoTjEEeKcQPOnIbNSoQ" elementId="vc.todo.sashcontainer.0" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_KosWojjEEeKcQPOnIbNSoQ" elementId="vc.todo.partstack.left" containerData="50">
+            <children xsi:type="basic:Part" xmi:id="_Ls9AEDmZEeKcQPOnIbNSoQ" elementId="vc.todo.part.first" contributionURI="bundleclass://vc.todo/vc.todo.views.FirstView" label="Todo List" tooltip=""/>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_HRRcwDmKEeKcQPOnIbNSoQ" elementId="vc.todo.partstack.right" containerData="50"/>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_KosWmDjEEeKcQPOnIbNSoQ" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_KosWmTjEEeKcQPOnIbNSoQ" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KosWnDjEEeKcQPOnIbNSoQ" label="Quit" command="_KosWijjEEeKcQPOnIbNSoQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_KosWnTjEEeKcQPOnIbNSoQ" label="Actions for todos">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="__FPpIJGyEeKU8OHa361bNQ" elementId="vc.todo.handledmenuitem.0" label="Open todo" iconURI="platform:/plugin/vc.todo/icons/sample.gif" command="_3KTL0JGyEeKU8OHa361bNQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_CTKWoJGzEeKU8OHa361bNQ" elementId="vc.todo.handledmenuitem.1" label="Save todo" iconURI="platform:/plugin/vc.todo/icons/save_edit.gif" command="_49F_IJGyEeKU8OHa361bNQ"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_KosWozjEEeKcQPOnIbNSoQ">
+      <children xsi:type="menu:ToolBar" xmi:id="_KosWpDjEEeKcQPOnIbNSoQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_KosWpTjEEeKcQPOnIbNSoQ" iconURI="platform:/plugin/vc.todo/icons/sample.gif"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_KosWizjEEeKcQPOnIbNSoQ" contributionURI="bundleclass://vc.todo/vc.todo.handlers.QuitHandler" command="_KosWijjEEeKcQPOnIbNSoQ"/>
+  <handlers xmi:id="_57C1IJGyEeKU8OHa361bNQ" elementId="vc.todo.handler.0" contributionURI="bundleclass://vc.todo/vc.todo.handlers.OpenTodo" command="_3KTL0JGyEeKU8OHa361bNQ"/>
+  <handlers xmi:id="_73kzQJGyEeKU8OHa361bNQ" elementId="vc.todo.handler.1" contributionURI="bundleclass://vc.todo/vc.todo.handlers.SaveTodo" command="_49F_IJGyEeKU8OHa361bNQ"/>
+  <commands xmi:id="_KosWijjEEeKcQPOnIbNSoQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_3KTL0JGyEeKU8OHa361bNQ" elementId="vc.todo.command.0" commandName="Open todo"/>
+  <commands xmi:id="_49F_IJGyEeKU8OHa361bNQ" elementId="vc.todo.command.1" commandName="Save todo"/>
+  <addons xmi:id="_KosWhDjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_KosWhTjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_KosWhjjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_KosWhzjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_KosWiDjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_KosWiTjEEeKcQPOnIbNSoQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</e4modelextension:VaaclipseApplication>
