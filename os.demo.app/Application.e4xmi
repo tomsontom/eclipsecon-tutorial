@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_dud6YJGhEeKU8OHa361bNQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_duehd5GhEeKU8OHa361bNQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_duehcJGhEeKU8OHa361bNQ" label="os.demo.app" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_duehjpGhEeKU8OHa361bNQ">
+      <children xsi:type="advanced:Perspective" xmi:id="_duehj5GhEeKU8OHa361bNQ">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_duehkJGhEeKU8OHa361bNQ">
+          <children xsi:type="basic:PartStack" xmi:id="_duehkZGhEeKU8OHa361bNQ">
+            <children xsi:type="basic:Part" xmi:id="_duehkpGhEeKU8OHa361bNQ" contributionURI="bundleclass://os.demo.app/os.demo.app.parts.SamplePart" label="Sample Part"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_duehh5GhEeKU8OHa361bNQ" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_duehiJGhEeKU8OHa361bNQ" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_duehiZGhEeKU8OHa361bNQ" label="Open" iconURI="platform:/plugin/os.demo.app/icons/sample.gif" command="_duehfpGhEeKU8OHa361bNQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_duehipGhEeKU8OHa361bNQ" label="Save" iconURI="platform:/plugin/os.demo.app/icons/save_edit.gif" command="_duehgZGhEeKU8OHa361bNQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_duehi5GhEeKU8OHa361bNQ" label="Quit" command="_duehepGhEeKU8OHa361bNQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_duehjJGhEeKU8OHa361bNQ" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_duehjZGhEeKU8OHa361bNQ" label="About" command="_duehhJGhEeKU8OHa361bNQ"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_duehk5GhEeKU8OHa361bNQ">
+      <children xsi:type="menu:ToolBar" xmi:id="_duehlJGhEeKU8OHa361bNQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_duehlZGhEeKU8OHa361bNQ" iconURI="platform:/plugin/os.demo.app/icons/sample.gif" command="_duehfpGhEeKU8OHa361bNQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_duehlpGhEeKU8OHa361bNQ" iconURI="platform:/plugin/os.demo.app/icons/save_edit.gif" command="_duehgZGhEeKU8OHa361bNQ"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_duehe5GhEeKU8OHa361bNQ" contributionURI="bundleclass://os.demo.app/os.demo.app.handlers.QuitHandler" command="_duehepGhEeKU8OHa361bNQ"/>
+  <handlers xmi:id="_duehf5GhEeKU8OHa361bNQ" contributionURI="bundleclass://os.demo.app/os.demo.app.handlers.OpenHandler" command="_duehfpGhEeKU8OHa361bNQ"/>
+  <handlers xmi:id="_duehgpGhEeKU8OHa361bNQ" contributionURI="bundleclass://os.demo.app/os.demo.app.handlers.SaveHandler" command="_duehgZGhEeKU8OHa361bNQ"/>
+  <handlers xmi:id="_duehhZGhEeKU8OHa361bNQ" contributionURI="bundleclass://os.demo.app/os.demo.app.handlers.AboutHandler" command="_duehhJGhEeKU8OHa361bNQ"/>
+  <bindingTables xmi:id="_duehfJGhEeKU8OHa361bNQ" bindingContext="_duehd5GhEeKU8OHa361bNQ">
+    <bindings xmi:id="_duehfZGhEeKU8OHa361bNQ" keySequence="M1+Q" command="_duehepGhEeKU8OHa361bNQ"/>
+    <bindings xmi:id="_duehgJGhEeKU8OHa361bNQ" keySequence="M1+O" command="_duehfpGhEeKU8OHa361bNQ"/>
+    <bindings xmi:id="_duehg5GhEeKU8OHa361bNQ" keySequence="M1+S" command="_duehgZGhEeKU8OHa361bNQ"/>
+    <bindings xmi:id="_duehhpGhEeKU8OHa361bNQ" keySequence="M1+A" command="_duehhJGhEeKU8OHa361bNQ"/>
+  </bindingTables>
+  <rootContext xmi:id="_duehd5GhEeKU8OHa361bNQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_dueheJGhEeKU8OHa361bNQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_dueheZGhEeKU8OHa361bNQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_duehepGhEeKU8OHa361bNQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_duehfpGhEeKU8OHa361bNQ" elementId="os.demo.app.open" commandName="openCommand"/>
+  <commands xmi:id="_duehgZGhEeKU8OHa361bNQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_duehhJGhEeKU8OHa361bNQ" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <addons xmi:id="_duehcZGhEeKU8OHa361bNQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_duehcpGhEeKU8OHa361bNQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_duehc5GhEeKU8OHa361bNQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_duehdJGhEeKU8OHa361bNQ" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_duehdZGhEeKU8OHa361bNQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_duehdpGhEeKU8OHa361bNQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
