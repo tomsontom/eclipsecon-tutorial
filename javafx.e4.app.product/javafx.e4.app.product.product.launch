@@ -18,7 +18,7 @@
 <stringAttribute key="location" value="${workspace_loc}/../runtime-javafx.e4.app.product"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-nl ${target.nl} -consoleLog -nosplash"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dosgi.framework.extensions=at.bestsolution.efxclipse.runtime.osgi"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dosgi.framework.extensions=at.bestsolution.efxclipse.runtime.osgi -Dprism.verbose=false -Djavafx.verbose=false"/>
 <stringAttribute key="pde.version" value="3.3"/>
 <stringAttribute key="product" value="javafx.e4.app.product"/>
 <stringAttribute key="productFile" value="/javafx.e4.app.product/javafx.e4.app.product.product"/>
