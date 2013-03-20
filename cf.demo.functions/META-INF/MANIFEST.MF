@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Functions
+Bundle-SymbolicName: cf.demo.functions
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: cf.demo.functions
+Require-Bundle: org.eclipse.e4.core.contexts;bundle-version="1.2.0",
+ org.eclipse.e4.ui.model.workbench;bundle-version="0.10.1",
+ org.eclipse.e4.core.di;bundle-version="1.2.0"
+Service-Component: component.xml
+Bundle-ActivationPolicy: lazy
