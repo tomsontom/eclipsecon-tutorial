@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_HHOHsJFUEeK_U4Bu80i24w" elementId="org.eclipse.e4.application" bindingContexts="_HHNgoJFUEeK_U4Bu80i24w">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_SKtDQJFUEeK_U4Bu80i24w" elementId="javafx.e4.app.trimmedwindow.0" label="Hello JavaFX" x="0" y="0" width="400" height="400"/>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_HHOHsJFUEeK_U4Bu80i24w" elementId="org.eclipse.e4.application" bindingContexts="_HHNgoJFUEeK_U4Bu80i24w">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_SKtDQJFUEeK_U4Bu80i24w" elementId="javafx.e4.app.trimmedwindow.0" label="Hello JavaFX" x="0" y="0" width="400" height="600">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_nbJncJFnEeK_U4Bu80i24w" elementId="javafx.e4.app.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_nw2xsJFnEeK_U4Bu80i24w" elementId="javafx.e4.app.perspective.list">
+        <children xsi:type="basic:Part" xmi:id="_qmtkgJFnEeK_U4Bu80i24w" elementId="javafx.e4.app.part.list" contributionURI="bundleclass://javafx.e4.app/views.TodoListView" label="Erinnerungen"/>
+      </children>
+      <children xsi:type="advanced:Perspective" xmi:id="_BmlmUJF4EeK_U4Bu80i24w" elementId="javafx.e4.app.perspective.detail">
+        <children xsi:type="basic:Part" xmi:id="_xgo2cJF3EeK_U4Bu80i24w" elementId="javafx.e4.app.part.detail" contributionURI="bundleclass://javafx.e4.app/views.TodoItemEditor" label="Details"/>
+      </children>
+    </children>
+  </children>
   <rootContext xmi:id="_HHNgoJFUEeK_U4Bu80i24w" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_HHOHsZFUEeK_U4Bu80i24w" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_HHOHspFUEeK_U4Bu80i24w" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
@@ -11,4 +20,5 @@
   <addons xmi:id="_HHOuwZFUEeK_U4Bu80i24w" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
   <addons xmi:id="_HHOuwpFUEeK_U4Bu80i24w" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_HHOuw5FUEeK_U4Bu80i24w" elementId="at.bestsolution.efxclipse.runtime.bindings.e4.model" contributionURI="bundleclass://at.bestsolution.efxclipse.runtime.bindings.e4/at.bestsolution.efxclipse.runtime.bindings.e4.BindingProcessingAddon"/>
+  <addons xmi:id="_lg2JAJGKEeK_U4Bu80i24w" elementId="javafx.e4.app.addon.0" contributionURI="bundleclass://javafx.e4.app/addon.AnimationAddon"/>
 </application:Application>

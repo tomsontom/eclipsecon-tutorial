@@ -1,1 +1,91 @@
 /* Main CSS-File */
+.MWindow {
+	-fx-background-image: url("../icons/theme1/burried.png") 	
+}
+
+.MPart {
+	-fx-background-color: white;
+}
+
+.iphone-toolbar {
+	-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);
+}
+
+.iphone {
+    -fx-background-color:
+        #a6b5c9,
+        linear-gradient(#303842 0%, #3e5577 20%, #375074 100%),
+        linear-gradient(#768aa5 0%, #849cbb 5%, #5877a2 50%, #486a9a 51%, #4a6c9b 100%);
+    -fx-background-insets: 0 0 -1 0,0,1;
+    -fx-background-radius: 5,5,4;
+    -fx-padding: 7 15 7 15;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+
+.button .label {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.iphone-toolbar .label.title {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+.list-cell .label.itemTitle {
+	-fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.list-cell:selected .label.itemTitle {
+	-fx-text-fill: white;
+}
+
+.list-cell .label.itemTime {
+    -fx-font-size: 10px;
+}
+
+.list-cell .label.itemTime {
+	-fx-text-fill: darkred;
+}
+
+.iphone Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 );
+}
+
+ImageView.next {
+	-fx-image: url("../icons/theme1/next.png");
+}
+
+ImageView.next:hover {
+	-fx-image: url("../icons/theme1/next_hover.png");
+}
+
+ImageView.add {
+	-fx-image: url("../icons/theme1/add.png");
+}
+
+.list-cell:focused {
+	-fx-background-color: #98a8bd;
+}
+
+VBox.detail {
+	-fx-padding: 10px;
+}
+
+VBox.contentContainer {
+	-fx-border-color: lightgray;
+	-fx-border-style: solid;
+	-fx-border-width: 0 0 1px 0;
+}
+
+VBox.contentContainer HBox {
+	-fx-border-color: lightgray;
+	-fx-border-style: solid;
+	-fx-border-width: 1px 1 0 1;
+	-fx-padding: 5 10 5 10;
+}
