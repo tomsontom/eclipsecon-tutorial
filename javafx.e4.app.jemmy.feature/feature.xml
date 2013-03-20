@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+	id="javafx.e4.app.jemmy.feature"
+	label="JFXOnE4 Jemmy JUnit Feature"
+	version="1.0.0.qualifier"
+	provider-name="BestSolution.at"
+	>
+		<description url="http://www.efxclipse.org">
+			TODO FILL WITH CONTENT
+		</description>
+
+		<copyright url="http://www.efxclipse.org">
+			TODO FILL WITH CONTENT
+		</copyright>
+
+		<license url="http://www.efxclipse.org">
+			TODO FILL WITH CONTENT
+		</license>
+
+   		<plugin id="javafx.e4.app.jemmy" install-size="0" version="0.0.0" unpack="false" />
+
+
+</feature>
