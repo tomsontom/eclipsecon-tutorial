@@ -2,11 +2,11 @@ package controller;
 
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import javax.inject.Inject;
+
 import model.Todo;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -33,21 +33,22 @@ public class TodoListViewController {
 		this.application = application;
 	}
 	
-	@PostConstruct
-	void init() {
-		
-	}
-	
 	public void openDetail(Todo item) {
 		application.getContext().set(Todo.class, item);
 		partService.switchPerspective((MPerspective) modelService.find("javafx.e4.app.perspective.detail", application));
 	}
 	
-	public ObservableList<Todo> getTodoItems() {
+	public ObservableList<Todo> getItems() {
 		if( items == null ) {
 			items = FXCollections.observableArrayList(new Todo("Go shopping", new Date()),new Todo("TODO 1"),new Todo("TODO 2"));	
 		}
 
 		return items;
+	}
+	
+	public void createNewItem() {
+		Todo item = new Todo("New Todo");
+		getItems().add(item);
+		openDetail(item);
 	}
 }

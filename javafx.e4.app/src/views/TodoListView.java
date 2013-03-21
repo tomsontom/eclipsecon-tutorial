@@ -69,7 +69,7 @@ public class TodoListView {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				
+				controller.createNewItem();
 			}
 		});
 		bar.getItems().add(add);
@@ -83,7 +83,7 @@ public class TodoListView {
 				return new TodoCell();
 			}
 		});
-		view.setItems(controller.getTodoItems());
+		view.setItems(controller.getItems());
 		parent.setCenter(view);
 	}
 
