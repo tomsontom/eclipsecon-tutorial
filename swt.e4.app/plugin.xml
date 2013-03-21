@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="swt.e4.app">
+         <property
+               value="true"
+               name="clearPersistedState">
+         </property>
+         <property
+               value="platform:/plugin/swt.e4.app/css/default.css"
+               name="applicationCSS">
+         </property>
+         <property
+               name="appName"
+               value="swt.e4.app">
+         </property>
+         <property
+               name="rendererFactoryUri"
+               value="bundleclass://swt.e4.renderer.solution/renderer.CustomRendererFactory">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

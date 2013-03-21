@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_zO2bkJICEeK_25BBs_0VCg" elementId="org.eclipse.e4.ide.application">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_zO2bkZICEeK_25BBs_0VCg" label="swt.e4.app" width="500" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_Hd5HwJIDEeK_25BBs_0VCg" elementId="swt.e4.app.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_H0-yEJIDEeK_25BBs_0VCg" elementId="swt.e4.app.perspective.list">
+        <children xsi:type="basic:Part" xmi:id="_zwCG8JILEeK_25BBs_0VCg" elementId="swt.e4.app.part.0" contributionURI="bundleclass://swt.e4.app/swt.e4.app.views.TodoListView" label="Erinnerungen" iconURI="platform:/plugin/swt.e4.app/icons/view-pim-tasks.png"/>
+      </children>
+      <children xsi:type="advanced:Perspective" xmi:id="_IxdocJIDEeK_25BBs_0VCg" elementId="swt.e4.app.perspective.detail">
+        <children xsi:type="basic:Part" xmi:id="_vravEJIYEeK_25BBs_0VCg" elementId="swt.e4.app.part.1" contributionURI="bundleclass://swt.e4.app/swt.e4.app.views.TodoItemEditor" label="Detail" iconURI="platform:/plugin/swt.e4.app/icons/view-media-playlist.png">
+          <toolbar xmi:id="_AJDQEJIiEeK_25BBs_0VCg" elementId="swt.e4.app.toolbar.0">
+            <children xsi:type="menu:DirectToolItem" xmi:id="_CrleQJIiEeK_25BBs_0VCg" elementId="swt.e4.app.directtoolitem.0" label="Done" contributionURI="bundleclass://swt.e4.app/swt.e4.app.handler.ApplyHandler"/>
+            <children xsi:type="menu:DirectToolItem" xmi:id="_HZ1WEJIiEeK_25BBs_0VCg" elementId="swt.e4.app.directtoolitem.1" label="Cancel" contributionURI="bundleclass://swt.e4.app/swt.e4.app.handler.CancelHandler"/>
+          </toolbar>
+        </children>
+      </children>
+    </children>
+  </children>
+  <addons xmi:id="_zO2bkpICEeK_25BBs_0VCg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_zO2bk5ICEeK_25BBs_0VCg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_zO2blJICEeK_25BBs_0VCg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_zO2blZICEeK_25BBs_0VCg" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_zO2blpICEeK_25BBs_0VCg" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_zO2bl5ICEeK_25BBs_0VCg" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
