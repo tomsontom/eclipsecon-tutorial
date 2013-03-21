@@ -21,7 +21,8 @@ Require-Bundle: at.bestsolution.efxclipse.runtime.application,
  org.eclipse.e4.ui.workbench,
  org.eclipse.e4.ui.services,
  at.bestsolution.efxclipse.runtime.workbench.renderers.base;bundle-version="0.8.1",
- at.bestsolution.efxclipse.runtime.animationutils;bundle-version="0.8.1"
+ at.bestsolution.efxclipse.runtime.animationutils;bundle-version="0.8.1",
+ service;bundle-version="1.0.0"
 Import-Package: javafx.animation;version="2.0.0",
  javafx.application;version="2.0.0",
  javafx.beans;version="2.0.0",
@@ -52,3 +53,4 @@ Import-Package: javafx.animation;version="2.0.0",
  javafx.util.converter;version="2.2.0",
  javax.annotation;version="1.0.0",
  javax.inject;version="1.0.0"
+Bundle-ActivationPolicy: lazy

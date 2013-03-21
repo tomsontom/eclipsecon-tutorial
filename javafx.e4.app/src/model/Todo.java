@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -10,13 +11,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import service.TodoDataService.Repeat;
 
 public class Todo {
 
-	public enum Repeat {
-		NEVER, DAILY, WEEKLY, BI_WEEKLY, MONTHLY, YEARLY
-	}
-
+	private String uid = UUID.randomUUID().toString();
+	
 	private StringProperty title = new SimpleStringProperty(this, "title");
 	private StringProperty extraInfo = new SimpleStringProperty(this,
 			"extraInfo");
@@ -52,6 +52,16 @@ public class Todo {
 				}
 			}
 		});
+	}
+	
+	public static Todo create(String id) {
+		Todo t = new Todo();
+		t.uid = id;
+		return t;
+	}
+	
+	public String getId() {
+		return uid;
 	}
 
 	// -----------------------------------
@@ -130,5 +140,30 @@ public class Todo {
 
 	public ObjectProperty<Date> endDateProperty() {
 		return this.endDate;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((uid == null) ? 0 : uid.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Todo other = (Todo) obj;
+		if (uid == null) {
+			if (other.uid != null)
+				return false;
+		} else if (!uid.equals(other.uid))
+			return false;
+		return true;
 	}
 }

@@ -25,9 +25,9 @@ import javafx.util.converter.DateTimeStringConverter;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import model.Todo.Repeat;
-
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+
+import service.TodoDataService.Repeat;
 
 import controller.TodoItemEditorController;
 

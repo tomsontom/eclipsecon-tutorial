@@ -1,7 +1,8 @@
 package controller;
 
-import java.util.Date;
+import java.util.List;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,6 +16,10 @@ import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
+import service.TodoDataService;
+import service.TodoDataService.Callback;
+import service.TodoDataService.TodoItem;
+
 @SuppressWarnings("restriction")
 @Creatable
 public class TodoListViewController {
@@ -26,11 +31,14 @@ public class TodoListViewController {
 	
 	private final EModelService modelService;
 	
+	private final TodoDataService dataService;
+	
 	@Inject
-	public TodoListViewController(EPartService partService, EModelService modelService, MApplication application) {
+	public TodoListViewController(EPartService partService, EModelService modelService, MApplication application, TodoDataService dataService) {
 		this.partService = partService;
 		this.modelService = modelService;
 		this.application = application;
+		this.dataService = dataService;
 	}
 	
 	public void openDetail(Todo item) {
@@ -40,10 +48,39 @@ public class TodoListViewController {
 	
 	public ObservableList<Todo> getItems() {
 		if( items == null ) {
-			items = FXCollections.observableArrayList(new Todo("Go shopping", new Date()),new Todo("TODO 1"),new Todo("TODO 2"));	
+			items = FXCollections.observableArrayList();
+			dataService.loadItems(new Callback<List<TodoItem>>() {
+				
+				@Override
+				public void call(final List<TodoItem> list) {
+					Platform.runLater(new Runnable() {
+						
+						@Override
+						public void run() {
+							for( TodoItem i : list ) {
+								Todo t = createItem(i);
+								if( ! items.contains(t) ) {
+									items.add(t);	
+								}
+							}
+						}
+					});
+				}
+			});
 		}
 
 		return items;
+	}
+	
+	private Todo createItem(TodoItem item) {
+		Todo t = Todo.create(item.id);
+		t.setTitle(item.title);
+		t.setExtraInfo(item.extraInfo);
+		t.setDate(item.date);
+		t.setHasDate(item.hasDate);
+		t.setEndDate(item.endDate);
+		t.setRepeat(item.repeat);
+		return t;
 	}
 	
 	public void createNewItem() {
