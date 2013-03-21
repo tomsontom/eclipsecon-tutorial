@@ -46,4 +46,10 @@ public class TodoListViewController {
 		}
 		return items;
 	}
+	
+	public void createNewItem() {
+		Todo item = new Todo("New Todo");
+		getItems().add(item);
+		openDetail(item);
+	}
 }

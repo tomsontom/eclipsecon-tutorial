@@ -17,10 +17,13 @@ import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseMoveListener;
+import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -38,12 +41,16 @@ public class TodoListView {
 	TodoListViewController controller;
 	
 	private Image nextIcon;
+	private Image nextIconActive;
 	private Font titleFont;
 	private Font dateFont;
 	private TableViewer viewer;
 	
+	private Todo currentOver;
+	
 	private void initResources(Display display) {
 		nextIcon = new Image(display, getClass().getClassLoader().getResourceAsStream("icons/next.png"));
+		nextIconActive = new Image(display, getClass().getClassLoader().getResourceAsStream("icons/next_hover.png"));
 		FontData data = display.getSystemFont().getFontData()[0];
 		titleFont = new Font(display, data.name, 15, SWT.BOLD);
 		dateFont = new Font(display,data.name,10,SWT.NONE);
@@ -73,12 +80,19 @@ public class TodoListView {
 				
 				int x = viewer.getTable().getBounds().width-nextIcon.getBounds().width-20;
 				int y = event.y + event.height/2 - nextIcon.getBounds().height/2;
-				event.gc.drawImage(nextIcon, x, y);
+				if( currentOver == element ) {
+					event.gc.drawImage(nextIconActive, x, y);
+				} else {
+					event.gc.drawImage(nextIcon, x, y);
+				}
 			}
 			
 			@Override
 			protected void measure(Event event, Object element) {
 				Todo item = (Todo) element;
+				if( item == null ) {
+					return;
+				}
 				event.gc.setFont(titleFont);
 				int y = event.gc.textExtent(item.getTitle()).y + LINE_SPACING;
 				
@@ -146,10 +160,59 @@ public class TodoListView {
 			public void mouseUp(MouseEvent e) {
 				ViewerCell c = viewer.getCell(new Point(e.x, e.y));
 				if( c != null ) {
-					controller.openDetail((Todo) c.getElement());
+					if( isImageArea(c.getBounds().y, c.getBounds().height, e) ) {
+						controller.openDetail((Todo) c.getElement());	
+					}
+				}
+			}
+			
+		});
+		viewer.getControl().addMouseMoveListener(new MouseMoveListener() {
+			
+			@Override
+			public void mouseMove(MouseEvent e) {
+				ViewerCell c = viewer.getCell(new Point(e.x, e.y));
+				if( c != null ) {
+					if( isImageArea(c.getBounds().y, c.getBounds().height, e) ) {
+						if( currentOver != c.getElement() ) {
+							currentOver = (Todo) c.getElement();
+							viewer.getControl().redraw();
+						}
+					} else {
+						if( currentOver != null ) {
+							currentOver = null;
+							viewer.getControl().redraw();
+						}
+					}
 				}
 			}
 		});
+		viewer.getControl().addMouseTrackListener(new MouseTrackListener() {
+			
+			@Override
+			public void mouseHover(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseExit(MouseEvent e) {
+				currentOver = null;
+				viewer.getControl().redraw();
+			}
+			
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				
+			}
+		});
+		
+	}
+	
+	private boolean isImageArea(int y, int height, MouseEvent event) {
+		int x = viewer.getTable().getBounds().width-nextIcon.getBounds().width-20;
+		y = y + height/2 - nextIcon.getBounds().height/2;
+		Rectangle rect = new Rectangle(x, y, nextIcon.getBounds().width, nextIcon.getBounds().height);
+		return rect.contains(event.x,event.y);
 	}
 	
 	@Focus
@@ -162,5 +225,9 @@ public class TodoListView {
 		if( nextIcon != null ) {
 			nextIcon.dispose();
 		}
+	}
+	
+	public TodoListViewController getController() {
+		return controller;
 	}
 }

@@ -178,6 +178,7 @@ public class PGroupContributedPartRenderer extends SWTPartRenderer {
 					PGroupToolItem item = new PGroupToolItem(group, SWT.PUSH);
 					item.setText(ti.getLocalizedLabel());
 					item.setImage(getImage(ti));
+					item.setToolTipText(ti.getLocalizedTooltip());
 					
 					final Runnable handlerRunnable;
 					if( i instanceof MDirectToolItem ) {
