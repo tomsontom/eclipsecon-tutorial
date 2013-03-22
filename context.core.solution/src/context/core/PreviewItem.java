@@ -31,6 +31,10 @@ public class PreviewItem {
 	
 	@Inject
 	void currentColor(@Active @Optional RGB rgb) {
+		if( comp.isDisposed() ) {
+			return;
+		}
+		
 		if( comp.getBackground() != null ) {
 			comp.getBackground().dispose();
 		}

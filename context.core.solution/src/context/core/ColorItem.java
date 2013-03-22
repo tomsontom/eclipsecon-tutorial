@@ -3,7 +3,9 @@ package context.core;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -21,11 +23,11 @@ public class ColorItem {
 	@Inject
 	private Point size;
 	
-	private IEclipseContext context;
+	@Inject
+	private ColorChooserAction action;
 	
 	@PostConstruct
 	void create(Composite parent, final IEclipseContext context) {
-		this.context = context;
 		comp = new Composite(parent,SWT.BORDER) {
 			@Override
 			public Point computeSize(int wHint, int hHint) {
@@ -58,13 +60,16 @@ public class ColorItem {
 		comp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				selectColor();
+				selectColor(context);
 			}
 		});
 	}
 	
-	void selectColor() {
-		
+	void selectColor(IEclipseContext context) {
+		RGB rgb = (RGB) ContextInjectionFactory.invoke(action, Execute.class, context);
+		if( rgb != null ) {
+			context.set(RGB.class, rgb);
+		}
 	}
 	
 	@Inject

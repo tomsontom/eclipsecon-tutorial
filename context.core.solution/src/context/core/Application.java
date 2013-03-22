@@ -26,6 +26,7 @@ public class Application implements IApplication {
 		s.setLayout(new FillLayout());
 		
 		IEclipseContext context = EclipseContextFactory.getServiceContext(bundleContext);
+		context.set(Shell.class, s);
 		context.set(Composite.class, s);
 		
 		ContextInjectionFactory.make(ColorSelectorUI.class, context);
