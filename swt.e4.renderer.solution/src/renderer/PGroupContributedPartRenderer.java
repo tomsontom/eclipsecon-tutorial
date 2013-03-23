@@ -18,7 +18,6 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
 import org.eclipse.e4.core.services.log.Logger;
-import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPlaceholder;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -77,68 +76,36 @@ public class PGroupContributedPartRenderer extends SWTPartRenderer {
 		if (!(element instanceof MPart) || !(parent instanceof Composite))
 			return null;
 
-		Widget parentWidget = (Widget) parent;
-		Widget newWidget = null;
+		Composite parentWidget = (Composite) parent;
 		final MPart part = (MPart) element;
 
-		
-		final Composite newComposite = new Composite((Composite) parentWidget, SWT.NONE);
-		FillLayout layout = new FillLayout();
-		layout.marginHeight=5;
-		layout.marginWidth=5;
-		newComposite.setLayout(layout);
-		final PGroup groupWidget = new PGroup(newComposite,
-				SWT.SMOOTH) {
+		PGroup newWidget = createGroupWidget(part, parentWidget);
 
-			/**
-			 * Field to determine whether we are currently in the midst of
-			 * granting focus to the part.
-			 */
-			private boolean beingFocused = false;
+		bindWidget(element, newWidget);
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.eclipse.swt.widgets.Composite#setFocus()
-			 */
-			@Override
-			public boolean setFocus() {
-				if (!beingFocused) {
-					try {
-						// we are currently asking the part to take focus
-						beingFocused = true;
-						// delegate an attempt to set the focus here to the
-						// part's implementation (if there is one)
-						Object object = part.getObject();
-						if (object != null) {
-							ContextInjectionFactory.invoke(object, Focus.class,
-									part.getContext(), null);
-							return true;
-						}
-						return super.setFocus();
-					} finally {
-						// we are done, unset our flag
-						beingFocused = false;
-					}
-				}
+		// Create a context for this part
+		IEclipseContext localContext = part.getContext();
+		localContext.set(Composite.class, newWidget);
 
-				if (logger != null) {
-					String id = part.getElementId();
-					if (id == null) {
-						logger.warn(new IllegalStateException(),
-								"Blocked recursive attempt to activate part " //$NON-NLS-1$
-										+ id);
-					} else {
-						logger.warn(new IllegalStateException(),
-								"Blocked recursive attempt to activate part"); //$NON-NLS-1$
-					}
-				}
+		Object newPart = createContributionInstance(part, localContext);
+		part.setObject(newPart);
 
-				// already being focused, likely some strange recursive call,
-				// just return
-				return true;
-			}
-		};
+		setupToolbar(part, newWidget, localContext);
+
+		return newWidget;
+	}
+
+	private Object createContributionInstance(MPart part,
+			IEclipseContext localContext) {
+		IContributionFactory contributionFactory = (IContributionFactory) localContext
+				.get(IContributionFactory.class.getName());
+		Object newPart = contributionFactory.create(part.getContributionURI(),
+				localContext);
+		return newPart;
+	}
+
+	private PGroup createGroupWidget(MPart part, Composite parent) {
+		final PGroup groupWidget = new PGroup(parent, SWT.SMOOTH);
 
 		groupWidget.setStrategy(new RectangleGroupStrategy() {
 			@Override
@@ -148,67 +115,45 @@ public class PGroupContributedPartRenderer extends SWTPartRenderer {
 		});
 		groupWidget.setToggleRenderer(null);
 		groupWidget.setText(part.getLocalizedLabel());
-		groupWidget.setImagePosition(SWT.LEFT|SWT.TOP);
+		groupWidget.setImagePosition(SWT.LEFT | SWT.TOP);
 		groupWidget.setImage(getImage(part));
 		groupWidget.setLayout(new FillLayout(SWT.VERTICAL));
 
-		newWidget = newComposite;
-		bindWidget(element, newWidget);
-
-		// Create a context for this part
-		IEclipseContext localContext = part.getContext();
-		localContext.set(Composite.class.getName(), groupWidget);
-
-		IContributionFactory contributionFactory = (IContributionFactory) localContext
-				.get(IContributionFactory.class.getName());
-		Object newPart = contributionFactory.create(part.getContributionURI(),
-				localContext);
-		part.setObject(newPart);
-		
-		setupToobar(part, groupWidget, contributionFactory,localContext);
-		
-		return newWidget;
+		return groupWidget;
 	}
 
-	private void setupToobar(MPart part, PGroup group, IContributionFactory contributionFactory, final IEclipseContext context) {
-		if( part.getToolbar() != null ) {
-			for(  MToolBarElement i : part.getToolbar().getChildren() ) {
-				if( i instanceof MToolItem ) {
+	private void setupToolbar(MPart part, PGroup group,
+			final IEclipseContext context) {
+		if (part.getToolbar() != null) {
+			IContributionFactory contributionFactory = (IContributionFactory) context
+					.get(IContributionFactory.class.getName());
+			for (MToolBarElement i : part.getToolbar().getChildren()) {
+				if (i instanceof MToolItem) {
 					MToolItem ti = (MToolItem) i;
 					PGroupToolItem item = new PGroupToolItem(group, SWT.PUSH);
 					item.setText(ti.getLocalizedLabel());
 					item.setImage(getImage(ti));
 					item.setToolTipText(ti.getLocalizedTooltip());
-					
-					final Runnable handlerRunnable;
-					if( i instanceof MDirectToolItem ) {
+
+					if (i instanceof MDirectToolItem) {
 						MDirectToolItem di = (MDirectToolItem) i;
-						final Object handler = contributionFactory.create(di.getContributionURI(), context);	
-						handlerRunnable = new Runnable() {
-							
-							@Override
-							public void run() {
-								ContextInjectionFactory.invoke(handler, Execute.class, context);
-							}
-						};
-					} else {
-						// Handle handled items
-						handlerRunnable = null;
-					}
-					
-					
-					item.addSelectionListener(new SelectionAdapter() {
+						final Object handler = contributionFactory.create(
+								di.getContributionURI(), context);
 						
-						@Override
-						public void widgetSelected(SelectionEvent e) {
-							handlerRunnable.run();
-						}						
-					});
+						item.addSelectionListener(new SelectionAdapter() {
+
+							@Override
+							public void widgetSelected(SelectionEvent e) {
+								ContextInjectionFactory.invoke(handler,
+										Execute.class, context);
+							}
+						});
+					}
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	protected boolean requiresFocus(MPart element) {
 		if (element == partToActivate) {
@@ -229,7 +174,7 @@ public class PGroupContributedPartRenderer extends SWTPartRenderer {
 		}
 
 	}
-	
+
 	@Override
 	public Object getUIContainer(MUIElement element) {
 		if (element instanceof MToolBar) {
@@ -267,5 +212,5 @@ public class PGroupContributedPartRenderer extends SWTPartRenderer {
 		}
 		super.disposeWidget(element);
 	}
-	
+
 }

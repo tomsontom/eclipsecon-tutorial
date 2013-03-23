@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.PathData;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.Region;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -98,14 +99,11 @@ public class FancyTrimWindowRender extends SWTPartRenderer {
 		}
 	}
 	
+	
 	@Override
 	public Object createWidget(MUIElement element, Object parent) {
 		MWindow window = (MWindow) element;
-		Shell s = new Shell(SWT.NO_TRIM);
-		s.setLayout(GridLayoutFactory.fillDefaults().create());
-		s.setText(window.getLocalizedLabel());
-		s.setBackgroundMode(SWT.INHERIT_DEFAULT);
-		s.setSize(window.getWidth(),window.getHeight());
+		Shell s = createShell(window);
 		
 		Path path = createRoundedPath(s.getDisplay(), 0, 0, window.getWidth(), window.getHeight(), 10, 10, 10, 10);
 		Path path2 = new Path(s.getDisplay(), path, 0.1f);
@@ -130,6 +128,16 @@ public class FancyTrimWindowRender extends SWTPartRenderer {
 		return s;
 	}
 	
+	private Shell createShell(MWindow window) {
+		Shell s = new Shell(SWT.NO_TRIM);
+		s.setLayout(GridLayoutFactory.fillDefaults().create());
+		s.setText(window.getLocalizedLabel());
+		s.setBackgroundMode(SWT.INHERIT_DEFAULT);
+		s.setSize(window.getWidth(),window.getHeight());
+		return s;
+	}
+
+	
 	private Control createTrimControl(Composite parent, final Shell s) {
 		initializeImages();
 		final Canvas c = new Canvas(parent,SWT.DOUBLE_BUFFERED);
@@ -151,6 +159,13 @@ public class FancyTrimWindowRender extends SWTPartRenderer {
 			public void handleEvent(Event e) {
 				switch (e.type) {
 					case SWT.MouseDown:
+						if( closeImage != null ) {
+							Rectangle r = closeImage.getBounds();
+							r.x = c.getSize().x - closeImage.getBounds().width - 5;
+							if( r.contains(e.x,e.y) ) {
+								s.dispose();
+							}
+						}
 						origin = new Point(e.x, e.y);
 						break;
 					case SWT.MouseUp:
@@ -175,7 +190,6 @@ public class FancyTrimWindowRender extends SWTPartRenderer {
 	@Override
 	public Object getUIContainer(MUIElement element) {
 		Shell s = (Shell) element.getParent().getWidget();
-		System.err.println("PARENT: " + s.getChildren()[1]); 
 		return s.getChildren()[1];
 	}
 	
