@@ -45,7 +45,7 @@ public class ColorSelectorUI {
 		
 		for( RGB rgb : RGBValues.RGBS ) {
 			//TODO Lab1
-			// * Create a child context
+			// * Create a child context of localContext
 			// * Store the RGB value as RGB.class
 			// * Create an instance of ColorItem.class
 			
