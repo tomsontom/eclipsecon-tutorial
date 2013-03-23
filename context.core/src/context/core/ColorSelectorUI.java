@@ -38,10 +38,9 @@ public class ColorSelectorUI {
 		g.setText("Colors");
 		g.setLayout(new GridLayout(10, true));
 		
-		//TODO Lab1
-		// * Store the size of the preview-icons (e.g. 40x40) as a Point
 		IEclipseContext localContext = context.createChild();
 		localContext.set(Group.class, g);
+		localContext.set(Point.class, new Point(40, 40));
 		
 		
 		for( RGB rgb : RGBValues.RGBS ) {
