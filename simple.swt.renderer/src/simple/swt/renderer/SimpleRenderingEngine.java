@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.services.contributions.IContributionFactory;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
@@ -53,13 +52,13 @@ public class SimpleRenderingEngine implements IPresentationEngine {
 		window.setContext(context);
 		
 		Shell s = new Shell(display);
-		s.setBounds(window.getX(),window.getY(),window.getWidth(),window.getHeight());
+		//TODO Lab: Set initial bounds of the 
 		s.setLayout(new FillLayout());
 		window.setWidget(s);
 		
 		for( MWindowElement e : window.getChildren() ) {
 			if( e.isToBeRendered() ) {
-				createGui(e);
+				//TODO Create UI-Element for MWindowElement
 			}
 		}
 		
@@ -84,15 +83,8 @@ public class SimpleRenderingEngine implements IPresentationEngine {
 		Shell s = (Shell) window.getWidget();
 		s.setSize(new Point(value.intValue(), s.getSize().y));
 	}
-	
-	@Inject
-	@Optional
-	private void handleWindowHeightChanged(@UIEventTopic(UIEvents.Window.TOPIC_HEIGHT) Event event) {
-		MWindow window = (MWindow) event.getProperty(UIEvents.EventTags.ELEMENT);
-		Integer value = (Integer) event.getProperty(UIEvents.EventTags.NEW_VALUE);
-		Shell s = (Shell) window.getWidget();
-		s.setSize(new Point(s.getSize().x, value.intValue()));
-	}
+
+	//TODO React upon height changes
 	
 	private Object createPart(MPart part, IEclipseContext parentContext, Composite parent) {
 		IEclipseContext context = parentContext.createChild("Part");
@@ -102,8 +94,7 @@ public class SimpleRenderingEngine implements IPresentationEngine {
 		Composite container = new Composite(parent,SWT.NONE);
 		context.set(Composite.class, container);
 		
-		IContributionFactory factory = context.get(IContributionFactory.class);
-		factory.create(part.getContributionURI(), context);
+		//TODO Create an instance of MPart#contributionURI using IContributionFactory 
 		
 		return container;
 	}
@@ -144,7 +135,7 @@ public class SimpleRenderingEngine implements IPresentationEngine {
 		MApplication application = (MApplication) uiRoot;
 		
 		for( MWindow w : application.getChildren() ) {
-			createGui(w);
+			//TODO Create the UI-Elements of MWindow
 		}
 		
 		while( oneVisible(application.getChildren()) ) {

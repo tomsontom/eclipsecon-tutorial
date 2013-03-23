@@ -17,7 +17,7 @@
          </property>
          <property
                name="presentationURI"
-               value="bundleclass://simple.swt.renderer.solution/simple.swt.renderer.SimpleRenderingEngine">
+               value="bundleclass://simple.swt.renderer/simple.swt.renderer.SimpleRenderingEngine">
          </property>
          <property
                name="appName"
