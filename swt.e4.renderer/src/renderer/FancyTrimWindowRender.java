@@ -93,7 +93,6 @@ public class FancyTrimWindowRender extends SWTPartRenderer {
 					InputStream in = getClass().getClassLoader().getResourceAsStream("icons/system-shutdown.png")) {
 				closeImage = new Image(display, in);	
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
