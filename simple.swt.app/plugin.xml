@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="simple.swt.app">
+         <property
+               value="true"
+               name="clearPersistedState">
+         </property>
+         <property
+               value="platform:/plugin/simple.swt.app/css/default.css"
+               name="applicationCSS">
+         </property>
+         <property
+               name="presentationURI"
+               value="bundleclass://simple.swt.renderer.solution/simple.swt.renderer.SimpleRenderingEngine">
+         </property>
+         <property
+               name="appName"
+               value="simple.swt.app">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
