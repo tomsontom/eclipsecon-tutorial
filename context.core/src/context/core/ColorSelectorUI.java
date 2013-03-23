@@ -39,7 +39,7 @@ public class ColorSelectorUI {
 		g.setLayout(new GridLayout(10, true));
 		
 		IEclipseContext localContext = context.createChild();
-		localContext.set(Group.class, g);
+		localContext.set(Composite.class, g);
 		localContext.set(Point.class, new Point(40, 40));
 		
 		
@@ -48,7 +48,7 @@ public class ColorSelectorUI {
 			// * Create a child context of localContext
 			// * Store the RGB value as RGB.class
 			// * Create an instance of ColorItem.class
-			
+
 		}
 		
 		return g;
