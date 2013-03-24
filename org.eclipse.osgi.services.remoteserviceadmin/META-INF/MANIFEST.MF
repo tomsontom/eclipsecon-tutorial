@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.osgi.services.remoteserviceadmin
+Bundle-Version: 1.5.0.qualifier
+Bundle-Vendor: %bundle.provider
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Localization: bundle
+Bundle-Description: %bundle.description
+Bundle-Copyright: %bundle.copyright
+Export-Package: org.osgi.service.remoteserviceadmin;version="5.0.0"
+Import-Package: org.osgi.framework

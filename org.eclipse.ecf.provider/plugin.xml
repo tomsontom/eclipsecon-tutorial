@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.1"?>
+<plugin>
+   <extension
+         point="org.eclipse.ecf.containerFactory">
+      <containerFactory
+            class="org.eclipse.ecf.provider.generic.GenericContainerInstantiator"
+            description="ECF Generic Server"
+            name="ecf.generic.server"
+            server="true">
+      </containerFactory>
+   </extension>
+   <extension
+         point="org.eclipse.ecf.containerFactory">
+      <containerFactory
+            class="org.eclipse.ecf.provider.generic.GenericContainerInstantiator"
+            description="ECF Generic Client"
+            hidden="true"
+            name="ecf.generic.client">
+      </containerFactory>
+   </extension>
+   <extension
+         point="org.eclipse.ecf.containerFactory">
+      <containerFactory
+            class="org.eclipse.ecf.provider.generic.SSLGenericContainerInstantiator"
+            description="ECF Generic Secure Server"
+            name="ecf.generic.ssl.server"
+            server="true">
+      </containerFactory>
+   </extension>
+   <extension
+         point="org.eclipse.ecf.containerFactory">
+      <containerFactory
+            class="org.eclipse.ecf.provider.generic.SSLGenericContainerInstantiator"
+            description="ECF Generic Secure Client"
+            hidden="true"
+            name="ecf.generic.ssl.client">
+      </containerFactory>
+   </extension>
+</plugin>
