@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.eclipse.ecf.core.IContainer;
 import org.eclipse.ecf.core.IContainerFactory;
@@ -29,8 +28,6 @@ import org.osgi.util.tracker.ServiceTracker;
 import service.TodoDataService;
 
 public class RemoteTodoItemService implements TodoDataService {
-	private Vector<TodoItem> items = new Vector<>();
-	
 	private List<Callback<TodoItem>> removeCallback = new ArrayList<>();
 	private List<Callback<TodoItem>> modifiedCallback = new ArrayList<>();
 	private Callback<List<TodoItem>> loadCallback;
@@ -88,9 +85,9 @@ public class RemoteTodoItemService implements TodoDataService {
 		bundleContext.registerService(
 				EventHandler.class.getName(), new EventHandler() {
 					
+					@SuppressWarnings("unchecked")
 					@Override
 					public synchronized void handleEvent(Event event) {
-						System.err.println(event.getProperty(KEY_EVENT_TYPE) + " => " + EVENT_TYPE_MODIFIED_ITEM);
 						Object type = event.getProperty(KEY_EVENT_TYPE);
 						if( loadCallback != null && EVENT_TYPE_ALL_DATA.equals(type) ) {
 							byte[] b = (byte[]) event.getProperty(KEY_DATA);
