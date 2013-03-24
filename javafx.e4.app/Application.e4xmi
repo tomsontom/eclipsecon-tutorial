@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_HHOHsJFUEeK_U4Bu80i24w" elementId="org.eclipse.e4.application" bindingContexts="_HHNgoJFUEeK_U4Bu80i24w">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_SKtDQJFUEeK_U4Bu80i24w" elementId="javafx.e4.app.trimmedwindow.0" label="Hello JavaFX" x="0" y="0" width="400" height="600">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_SKtDQJFUEeK_U4Bu80i24w" elementId="javafx.e4.app.trimmedwindow.0" label="Todolist" x="0" y="0" width="400" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_nbJncJFnEeK_U4Bu80i24w" elementId="javafx.e4.app.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_nw2xsJFnEeK_U4Bu80i24w" elementId="javafx.e4.app.perspective.list">
         <children xsi:type="basic:Part" xmi:id="_qmtkgJFnEeK_U4Bu80i24w" elementId="javafx.e4.app.part.list" contributionURI="bundleclass://javafx.e4.app/views.TodoListView" label="Erinnerungen"/>

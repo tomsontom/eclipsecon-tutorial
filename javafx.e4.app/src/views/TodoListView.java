@@ -63,6 +63,7 @@ public class TodoListView {
 		}
 		
 		Button add = new Button();
+		add.setId("add-todo-button");
 		add.setGraphic(ImageViewBuilder.create().styleClass("add").build());
 		add.getStyleClass().add("iphone");
 		add.setOnAction(new EventHandler<ActionEvent>() {
