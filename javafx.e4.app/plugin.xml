@@ -8,6 +8,10 @@
 		<property name="applicationXMI" value="javafx.e4.app/Application.e4xmi" />
 		
 		<property name="cssTheme" value="theme.default" />
+  <property
+        name="rendererFactoryUri"
+        value="bundleclass://javafx.e4.renderer/javafx.e4.renderer.CustomRendererFactory">
+  </property>
 		
 	</product>
 	
