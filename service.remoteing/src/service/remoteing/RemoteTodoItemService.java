@@ -90,6 +90,7 @@ public class RemoteTodoItemService implements TodoDataService {
 					
 					@Override
 					public synchronized void handleEvent(Event event) {
+						System.err.println(event.getProperty(KEY_EVENT_TYPE) + " => " + EVENT_TYPE_MODIFIED_ITEM);
 						Object type = event.getProperty(KEY_EVENT_TYPE);
 						if( loadCallback != null && EVENT_TYPE_ALL_DATA.equals(type) ) {
 							byte[] b = (byte[]) event.getProperty(KEY_DATA);
@@ -106,6 +107,8 @@ public class RemoteTodoItemService implements TodoDataService {
 							loadCallback = null;	
 						} else if( EVENT_TYPE_MODIFIED_ITEM.equals(type) 
 								|| EVENT_TYPE_DELETE_ITEM.equals(type)) {
+							System.err.println("EXTRACTING");
+							
 							TodoItem item = extractItem(event);
 							
 							if( item != null ) {
@@ -142,7 +145,7 @@ public class RemoteTodoItemService implements TodoDataService {
 		try {
 			ByteArrayOutputStream r = new ByteArrayOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(r);
-			out.writeObject(items);
+			out.writeObject(item);
 			return r.toByteArray();	
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -180,14 +183,17 @@ public class RemoteTodoItemService implements TodoDataService {
 
 	@Override
 	public void saveItem(TodoItem item) {
-		// TODO Auto-generated method stub
-		
+		Map<String, Object> properties = new HashMap<>();
+		properties.put(KEY_EVENT_TYPE, EVENT_TYPE_MODIFIED_ITEM);
+		properties.put(KEY_DATA, serializeItem(item));
+		Event evt = new Event(DEFAULT_TOPIC, properties);
+		eventAdminImpl.postEvent(evt);
 	}
 
 	@Override
 	public void deleteItem(TodoItem item) {
 		Map<String, Object> properties = new HashMap<>();
-		properties.put(KEY_EVENT_TYPE, EVENT_TYPE_REGISTER);
+		properties.put(KEY_EVENT_TYPE, EVENT_TYPE_DELETE_ITEM);
 		properties.put(KEY_DATA, serializeItem(item));
 		Event evt = new Event(DEFAULT_TOPIC, properties);
 		eventAdminImpl.postEvent(evt);

@@ -10,6 +10,8 @@ import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
+import service.TodoDataService;
+
 @SuppressWarnings("restriction")
 @Creatable
 public class TodoItemEditorController {
@@ -22,11 +24,14 @@ public class TodoItemEditorController {
 	
 	private final EModelService modelService;
 	
+	private final TodoDataService dataService;
+	
 	@Inject
-	public TodoItemEditorController(EPartService partService, EModelService modelService, MApplication application) {
+	public TodoItemEditorController(EPartService partService, EModelService modelService, MApplication application, TodoDataService dataService) {
 		this.partService = partService;
 		this.modelService = modelService;
 		this.application = application;
+		this.dataService = dataService;
 	}
 	
 	@Inject
@@ -57,6 +62,7 @@ public class TodoItemEditorController {
 		currentItem.setHasDate(staticItem.isHasDate());
 		currentItem.setEndDate(staticItem.getEndDate());
 		currentItem.setRepeat(staticItem.getRepeat());
+		dataService.saveItem(Util.toDTO(currentItem));
 		switchBack();
 	}
 	

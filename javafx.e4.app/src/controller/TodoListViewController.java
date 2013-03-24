@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.application.Platform;
@@ -39,6 +40,45 @@ public class TodoListViewController {
 		this.modelService = modelService;
 		this.application = application;
 		this.dataService = dataService;
+		this.dataService.addItemModifiedCallback(new Callback<TodoItem>() {
+			
+			@Override
+			public void call(final TodoItem t) {
+				System.err.println("MODIFIED CALLBACK IS HERE!!!!");
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						for( Todo to : items ) {
+							if( to.getId().equals(t.id) ) {
+								Util.updateData(to, t);
+								return;
+							}
+						}
+						
+						items.add(Util.fromDTO(t));
+					}
+				});
+			}
+		});
+		this.dataService.addItemRemoved(new Callback<TodoDataService.TodoItem>() {
+			
+			@Override
+			public void call(final TodoItem t) {
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						Iterator<Todo> it = items.iterator();
+						while( it.hasNext() ) {
+							if( it.next().getId().equals(t.id) ) {
+								it.remove();
+							}
+						}
+					}
+				});
+			}
+		});
 	}
 	
 	public void openDetail(Todo item) {
@@ -58,7 +98,7 @@ public class TodoListViewController {
 						@Override
 						public void run() {
 							for( TodoItem i : list ) {
-								Todo t = createItem(i);
+								Todo t = Util.fromDTO(i);
 								if( ! items.contains(t) ) {
 									items.add(t);	
 								}
@@ -71,18 +111,7 @@ public class TodoListViewController {
 
 		return items;
 	}
-	
-	private Todo createItem(TodoItem item) {
-		Todo t = Todo.create(item.id);
-		t.setTitle(item.title);
-		t.setExtraInfo(item.extraInfo);
-		t.setDate(item.date);
-		t.setHasDate(item.hasDate);
-		t.setEndDate(item.endDate);
-		t.setRepeat(item.repeat);
-		return t;
-	}
-	
+		
 	public void createNewItem() {
 		Todo item = new Todo("New Todo");
 		getItems().add(item);
