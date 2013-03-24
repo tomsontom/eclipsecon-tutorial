@@ -39,17 +39,15 @@ public class MemoryTodoItemService implements TodoDataService {
 	}
 
 	@Override
-	public void saveItem(TodoItem item, Callback<Void> callback) {
+	public void saveItem(TodoItem item) {
 		if( ! items.contains(item) ) {
 			items.add(item);
 		}
-		callback.call(null);
 	}
 
 	@Override
-	public void deleteItem(TodoItem item, Callback<Void> callback) {
+	public void deleteItem(TodoItem item) {
 		items.remove(item);
-		callback.call(null);
 	}
 
 }

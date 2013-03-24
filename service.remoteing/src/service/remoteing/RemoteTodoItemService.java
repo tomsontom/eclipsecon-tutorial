@@ -1,15 +1,16 @@
 package service.remoteing;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Vector;
 
 import org.eclipse.ecf.core.IContainer;
@@ -26,15 +27,12 @@ import org.osgi.service.event.EventHandler;
 import org.osgi.util.tracker.ServiceTracker;
 
 import service.TodoDataService;
-import service.TodoDataService.Callback;
-import service.TodoDataService.TodoItem;
 
 public class RemoteTodoItemService implements TodoDataService {
 	private Vector<TodoItem> items = new Vector<>();
 	
-	private Callback<TodoItem> removeCallback;
-	private Callback<TodoItem> addCallback;
-	private Callback<TodoItem> modifiedCallback;
+	private List<Callback<TodoItem>> removeCallback = new ArrayList<>();
+	private List<Callback<TodoItem>> modifiedCallback = new ArrayList<>();
 	private Callback<List<TodoItem>> loadCallback;
 	
 	private static final String DEFAULT_CONTAINER_TYPE = "ecf.generic.client";
@@ -43,6 +41,7 @@ public class RemoteTodoItemService implements TodoDataService {
 	
 	
 	private static final String KEY_EVENT_TYPE = "eventType";
+	private static final String KEY_DATA = "data";
 	
 	private static final String EVENT_TYPE_REGISTER = "NEW_CLIENT_REGISTERED";
 	private static final String EVENT_TYPE_ALL_DATA = "ALL_DATA";
@@ -90,10 +89,10 @@ public class RemoteTodoItemService implements TodoDataService {
 				EventHandler.class.getName(), new EventHandler() {
 					
 					@Override
-					public void handleEvent(Event event) {
+					public synchronized void handleEvent(Event event) {
 						Object type = event.getProperty(KEY_EVENT_TYPE);
 						if( loadCallback != null && EVENT_TYPE_ALL_DATA.equals(type) ) {
-							byte[] b = (byte[]) event.getProperty("DATA");
+							byte[] b = (byte[]) event.getProperty(KEY_DATA);
 							try {
 								ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(b));
 								loadCallback.call((List<TodoItem>) in.readObject());
@@ -104,13 +103,51 @@ public class RemoteTodoItemService implements TodoDataService {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							synchronized (loadCallback) {
-								loadCallback = null;	
+							loadCallback = null;	
+						} else if( EVENT_TYPE_MODIFIED_ITEM.equals(type) 
+								|| EVENT_TYPE_DELETE_ITEM.equals(type)) {
+							TodoItem item = extractItem(event);
+							
+							if( item != null ) {
+								List<Callback<TodoItem>> list = null;
+								if( EVENT_TYPE_MODIFIED_ITEM.equals(type) ) {
+									list = modifiedCallback;
+								} else {
+									list = removeCallback;
+								}
+								for( Callback<TodoItem> modified : list ) {
+									modified.call(item);	
+								}
 							}
 						}
 					}
 				}, props);
 		eventAdminImpl.start();
+	}
+	
+	private TodoItem extractItem(Event event) {
+		try {
+			byte[] b = (byte[]) event.getProperty(KEY_DATA);
+			ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(b));
+			return (TodoItem) in.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private byte[] serializeItem(TodoItem item) {
+		try {
+			ByteArrayOutputStream r = new ByteArrayOutputStream();
+			ObjectOutputStream out = new ObjectOutputStream(r);
+			out.writeObject(items);
+			return r.toByteArray();	
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	protected IContainerManager getContainerManager(BundleContext bundleContext) {
@@ -123,14 +160,12 @@ public class RemoteTodoItemService implements TodoDataService {
 	
 	@Override
 	public void addItemRemoved(Callback<TodoItem> callback) {
-		// TODO Auto-generated method stub
-		
+		removeCallback.add(callback);
 	}
 
 	@Override
 	public void addItemModifiedCallback(Callback<TodoItem> callback) {
-		// TODO Auto-generated method stub
-		
+		modifiedCallback.add(callback);
 	}
 
 	@Override
@@ -144,15 +179,18 @@ public class RemoteTodoItemService implements TodoDataService {
 	}
 
 	@Override
-	public void saveItem(TodoItem item, Callback<Void> callback) {
+	public void saveItem(TodoItem item) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteItem(TodoItem item, Callback<Void> callback) {
-		// TODO Auto-generated method stub
-		
+	public void deleteItem(TodoItem item) {
+		Map<String, Object> properties = new HashMap<>();
+		properties.put(KEY_EVENT_TYPE, EVENT_TYPE_REGISTER);
+		properties.put(KEY_DATA, serializeItem(item));
+		Event evt = new Event(DEFAULT_TOPIC, properties);
+		eventAdminImpl.postEvent(evt);
 	}
 
 }

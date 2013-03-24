@@ -75,6 +75,6 @@ public interface TodoDataService {
 	public void addItemRemoved(Callback<TodoItem> callback);
 	public void addItemModifiedCallback(Callback<TodoItem> callback);
 	public void loadItems(Callback<List<TodoItem>> callback);
-	public void saveItem(TodoItem item, Callback<Void> callback);
-	public void deleteItem(TodoItem item, Callback<Void> callback);
+	public void saveItem(TodoItem item);
+	public void deleteItem(TodoItem item);
 }

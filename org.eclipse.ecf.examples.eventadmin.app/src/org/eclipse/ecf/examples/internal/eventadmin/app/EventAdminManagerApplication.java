@@ -10,15 +10,16 @@
  *****************************************************************************/
 package org.eclipse.ecf.examples.internal.eventadmin.app;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Vector;
 
 import org.eclipse.equinox.app.IApplication;
@@ -36,11 +37,13 @@ public class EventAdminManagerApplication extends AbstractEventAdminApplication
 	public static final String DEFAULT_CONTAINER_ID = "tcp://localhost:61616/exampleTopic";
 
 	private static final String KEY_EVENT_TYPE = "eventType";
+	private static final String KEY_DATA = "data";
 	
 	private static final String EVENT_TYPE_REGISTER = "NEW_CLIENT_REGISTERED";
 	private static final String EVENT_TYPE_ALL_DATA = "ALL_DATA";
 	private static final String EVENT_TYPE_DELETE_ITEM = "DELETE_ITEM";
 	private static final String EVENT_TYPE_MODIFIED_ITEM = "MODIFIED_ITEM";
+	
 	
 	private ServiceRegistration testEventHandlerRegistration;
 
@@ -72,7 +75,7 @@ public class EventAdminManagerApplication extends AbstractEventAdminApplication
 								ByteArrayOutputStream r = new ByteArrayOutputStream();
 								ObjectOutputStream out = new ObjectOutputStream(r);
 								out.writeObject(items);
-								properties.put("DATA", r.toByteArray());
+								properties.put(KEY_DATA, r.toByteArray());
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -80,6 +83,17 @@ public class EventAdminManagerApplication extends AbstractEventAdminApplication
 							
 							Event evt = new Event(DEFAULT_TOPIC, properties);
 							eventAdminImpl.postEvent(evt);
+						} else if( EVENT_TYPE_DELETE_ITEM.equals(type) ) {
+							items.remove(extractItem(event));
+						} else if( EVENT_TYPE_MODIFIED_ITEM.equals(type) ){
+							TodoItem i = extractItem(event);
+							int idx = items.indexOf(i);
+							if( idx == -1 ) {
+								items.add(i);
+							} else {
+								items.set(items.indexOf(i), i);	
+							}
+							
 						}
 					}
 				}, props);
@@ -87,6 +101,19 @@ public class EventAdminManagerApplication extends AbstractEventAdminApplication
 		waitForDone();
 
 		return IApplication.EXIT_OK;
+	}
+	
+	private TodoItem extractItem(Event event) {
+		try {
+			byte[] b = (byte[]) event.getProperty(KEY_DATA);
+			ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(b));
+			return (TodoItem) in.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	protected void shutdown() {
