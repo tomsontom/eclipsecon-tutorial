@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import model.Todo;
 
 import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -35,6 +36,9 @@ public class TodoListViewController {
 	private final TodoDataService dataService;
 	
 	@Inject
+	UISynchronize synchronizer;
+	
+	@Inject
 	public TodoListViewController(EPartService partService, EModelService modelService, MApplication application, TodoDataService dataService) {
 		this.partService = partService;
 		this.modelService = modelService;
@@ -44,8 +48,7 @@ public class TodoListViewController {
 			
 			@Override
 			public void call(final TodoItem t) {
-				System.err.println("MODIFIED CALLBACK IS HERE!!!!");
-				Platform.runLater(new Runnable() {
+				synchronizer.asyncExec(new Runnable() {
 					
 					@Override
 					public void run() {
@@ -65,7 +68,7 @@ public class TodoListViewController {
 			
 			@Override
 			public void call(final TodoItem t) {
-				Platform.runLater(new Runnable() {
+				synchronizer.asyncExec(new Runnable() {
 					
 					@Override
 					public void run() {
