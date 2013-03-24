@@ -1,5 +1,6 @@
 package service;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,12 @@ public interface TodoDataService {
 		NEVER, DAILY, WEEKLY, BI_WEEKLY, MONTHLY, YEARLY
 	}
 	
-	public class TodoItem {
+	public class TodoItem implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		
 		private static final DateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		public final String id;
 		public final String title;
@@ -66,9 +72,8 @@ public interface TodoDataService {
 		public void call(T t);
 	}
 	
-	public void setItemRemoved(Callback<TodoItem> callback);
-	public void setItemAddedCallback(Callback<TodoItem> callback);
-	public void setItemModifiedCallback(Callback<TodoItem> callback);
+	public void addItemRemoved(Callback<TodoItem> callback);
+	public void addItemModifiedCallback(Callback<TodoItem> callback);
 	public void loadItems(Callback<List<TodoItem>> callback);
 	public void saveItem(TodoItem item, Callback<Void> callback);
 	public void deleteItem(TodoItem item, Callback<Void> callback);

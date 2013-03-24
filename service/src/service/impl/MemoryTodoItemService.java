@@ -1,6 +1,7 @@
 package service.impl;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -9,9 +10,8 @@ import service.TodoDataService;
 public class MemoryTodoItemService implements TodoDataService {
 	private Vector<TodoItem> items = new Vector<>();
 	
-	private Callback<TodoItem> removeCallback;
-	private Callback<TodoItem> addCallback;
-	private Callback<TodoItem> modifiedCallback;
+	private List<Callback<TodoItem>> removeCallback = new ArrayList<>();
+	private List<Callback<TodoItem>> modifiedCallback = new ArrayList<>();
 	
 	public MemoryTodoItemService() {
 		try {
@@ -24,18 +24,13 @@ public class MemoryTodoItemService implements TodoDataService {
 	}
 	
 	@Override
-	public void setItemRemoved(Callback<TodoItem> callback) {
-		this.removeCallback = callback;
+	public void addItemRemoved(Callback<TodoItem> callback) {
+		this.removeCallback.add(callback);
 	}
 
 	@Override
-	public void setItemAddedCallback(Callback<TodoItem> callback) {
-		this.addCallback = callback;
-	}
-	
-	@Override
-	public void setItemModifiedCallback(Callback<TodoItem> callback) {
-		this.modifiedCallback = callback;
+	public void addItemModifiedCallback(Callback<TodoItem> callback) {
+		this.modifiedCallback.add(callback);
 	}
 
 	@Override

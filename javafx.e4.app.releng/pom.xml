@@ -24,6 +24,9 @@
 	</properties>
 
 	<modules>
+		<module>../service</module>
+		<module>../javafx.e4.renderer</module>
+		<module>../javafx.e4.renderer.solution</module>
 		<module>../javafx.e4.app</module>
 		<module>../javafx.e4.app.feature</module>
 		<module>../javafx.e4.app.product</module>
