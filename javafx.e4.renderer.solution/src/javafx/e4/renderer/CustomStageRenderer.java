@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimBar;
@@ -54,7 +55,7 @@ public class CustomStageRenderer extends DefWindowRenderer {
 
 		@Override
 		protected Stage createWidget() {
-			stage = new Stage();
+			stage = new Stage(StageStyle.UNDECORATED);
 			pane = new BorderPane();
 			contentPane = new FillLayoutPane();
 			pane.setCenter(contentPane);
