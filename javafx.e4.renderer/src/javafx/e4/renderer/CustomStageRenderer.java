@@ -34,6 +34,7 @@ public class CustomStageRenderer extends DefWindowRenderer {
 
 	@Override
 	protected Class<? extends WWindow<Stage>> getWidgetClass(MWindow element) {
+		//TODO Return the stage-widget class
 		return MyStageWidget.class;
 	}
 	
@@ -55,7 +56,7 @@ public class CustomStageRenderer extends DefWindowRenderer {
 
 		@Override
 		protected Stage createWidget() {
-			stage = new Stage(StageStyle.UNDECORATED);
+			stage = null;//TODO create a stage instance using StageStyle.UNDECORATED;
 			pane = new BorderPane();
 			contentPane = new FillLayoutPane();
 			pane.setCenter(contentPane);
@@ -88,7 +89,7 @@ public class CustomStageRenderer extends DefWindowRenderer {
 		
 		@Override
 		public void addChild(WLayoutedWidget<MWindowElement> widget) {
-			contentPane.getChildren().add((Node) widget.getStaticLayoutNode());
+			//TODO implement appending of child at the end of the list
 		}
 
 		@Override

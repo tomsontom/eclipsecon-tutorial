@@ -15,8 +15,6 @@ public class CustomRendererFactory extends DefWorkbenchRendererFactory {
 		super(context);
 	}
 
-	@Override
-	protected Class<? extends BaseWindowRenderer<?>> getWindowRendererClass() {
-		return CustomStageRenderer.class;
-	}
+	//TODO Overload getWindowRendererClass and return CustomStageRenderer
+
 }
