@@ -42,7 +42,6 @@ public class EventAdminManagerApplication extends AbstractEventAdminApplication
 	private static final String EVENT_TYPE_DELETE_ITEM = "DELETE_ITEM";
 	private static final String EVENT_TYPE_MODIFIED_ITEM = "MODIFIED_ITEM";
 	
-	private TestSender testSender;
 	private ServiceRegistration testEventHandlerRegistration;
 
 	private Vector<TodoItem> items = new Vector<>();
@@ -85,22 +84,12 @@ public class EventAdminManagerApplication extends AbstractEventAdminApplication
 					}
 				}, props);
 		
-//
-//		// XXX for testing, setup a test sender
-//		testSender = new TestSender(eventAdminImpl, topic, container.getID()
-//				.getName());
-//		new Thread(testSender).start();
-
 		waitForDone();
 
 		return IApplication.EXIT_OK;
 	}
 
 	protected void shutdown() {
-		if (testSender != null) {
-			testSender.stop();
-			testSender = null;
-		}
 		if (testEventHandlerRegistration != null) {
 			testEventHandlerRegistration.unregister();
 			testEventHandlerRegistration = null;
