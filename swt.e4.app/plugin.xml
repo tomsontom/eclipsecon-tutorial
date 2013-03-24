@@ -21,7 +21,7 @@
          </property>
          <property
                name="rendererFactoryUri"
-               value="bundleclass://swt.e4.renderer.solution/renderer.CustomRendererFactory">
+               value="bundleclass://swt.e4.renderer/renderer.CustomRendererFactory">
          </property>
       </product>
    </extension>
